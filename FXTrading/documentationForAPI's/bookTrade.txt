@@ -1,0 +1,38 @@
+
+
+1.Book Trade
+
+    Description:it performs validation on trade data & book the trade
+		if everything is okay then it returns trade object else it returns object(Map) of errors
+    
+    Endpoints: /do-trade
+    Request: POST
+
+    Request Body:
+                Trade - Object
+                    String customerName: String
+                    String currencyPair:String
+                    String usdAmount:String
+
+    Response:
+               ResponseEntity Object with sataus  
+	
+  
+    Error:
+
+                   1.Missing parameter
+                    -customerName
+                    -currencyPair
+                    -usdAmount
+
+                   2.Empty parameter
+                    -customerName
+                    -currencyPair
+                    -usdAmount
+
+                   3.Amount must be Integer
+                   4.Amount must be Positive
+                   5.currencyPair must USDINR
+
+        
+
