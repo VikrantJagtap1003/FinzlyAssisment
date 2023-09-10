@@ -7,7 +7,7 @@ public class FXTradingEntity{
 	
 	private String usd_Amount;
 	
-	private int customerID;
+	private int tradeId;
 	
 	private String customerName;
 	
@@ -25,12 +25,12 @@ public class FXTradingEntity{
 
 	private String indianAmount;
 	
-	public int getCustomerID() {
-		return customerID;
+	public int gettradeId() {
+		return tradeId;
 	}
 
-	public void setCustomerID(int customerID) {
-		this.customerID = customerID;
+	public void settradeId(int tradeId) {
+		this.tradeId = tradeId;
 	}
 
 	public String getCustomerName() {
@@ -55,17 +55,17 @@ public class FXTradingEntity{
 		super();
 	}
 
-	public FXTradingEntity(String usd_Amount, int customerID, String customerName, String currencyPair) {
+	public FXTradingEntity(String usd_Amount, int tradeId, String customerName, String currencyPair) {
 		super();
 		this.usd_Amount = usd_Amount;
-		this.customerID = customerID;
+		this.tradeId = tradeId;
 		this.customerName = customerName;
 		this.currencyPair = currencyPair;
 	}
 
 	@Override
 	public String toString() {
-		return "FXTradingEntity [usd_Amount=" + usd_Amount + ", customerID=" + customerID + ", customerName="
+		return "FXTradingEntity [usd_Amount=" + usd_Amount + ",tradeId=" + tradeId + ", customerName="
 				+ customerName + ", currencyPair=" + currencyPair + ", indianAmount=" + indianAmount + "]";
 	}
 
