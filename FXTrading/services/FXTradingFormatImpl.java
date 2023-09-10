@@ -22,12 +22,20 @@ public class FXTradingFormatImpl  implements FXTradingFormat{
 	public Object doTrade(FXTradingEntity fxTradingEntity){
 		double validAmount=0;
 		Map<String, String> errorsByUser=new TreeMap<>();
-		
-		if(fxTradingEntity.getCustomerName().isBlank())
+		if(fxTradingEntity.getCustomerName()==null)
+		{
+			errorsByUser.put("Customer-Name", "it is mandatory to provide customer name");
+		}
+		else if( fxTradingEntity.getCustomerName().isBlank())
 		{
 			errorsByUser.put("Customer-Name", "Customer name cannot be empty");
 		}
-		if(fxTradingEntity.getUsd_Amount().isBlank())
+		
+		if(fxTradingEntity.getUsd_Amount()==null)
+		{
+			errorsByUser.put("USD Amount", "it is mandatory to provide USD Amount");
+		}
+		else if(fxTradingEntity.getUsd_Amount().isBlank())
 		{
 			errorsByUser.put("Usd Amount", "Usd Amount cannot be empty");
 		}
@@ -43,7 +51,12 @@ public class FXTradingFormatImpl  implements FXTradingFormat{
 				errorsByUser.put("Usd Amount", "Usd Amount must be integer value");
 			}
 		}
-		if(!fxTradingEntity.getCurrencyPair().equals("USDINR"))
+		
+		if(fxTradingEntity.getCurrencyPair()==null)
+		{
+			errorsByUser.put("currency-pair", "it is mandatory to provide currency-pair");
+		}
+		else if(!fxTradingEntity.getCurrencyPair().equals("USDINR"))
 		{
 			errorsByUser.put("Currency-Pair", "Currency pair is not USDINR");
 		}
@@ -55,10 +68,10 @@ public class FXTradingFormatImpl  implements FXTradingFormat{
 			fxTradingEntity.setIndianAmount(indianAmount);
 			String formatedUsdAmount=amountFormater.formatingUSDAmount(validAmount);
 			fxTradingEntity.setUsd_Amount(formatedUsdAmount);
-
-			FXTradingFormatImpl.tradeNo=FXTradingFormatImpl.tradeNo+1;
+			tradeNo=tradeNo+1;
 			fxTradingEntity.setTradeId(tradeNo);
 			
+	          
 			this.bookedTrades.add(fxTradingEntity);
 			return fxTradingEntity;
 		}
@@ -67,7 +80,6 @@ public class FXTradingFormatImpl  implements FXTradingFormat{
 		}
 		
 	}
-
 	
 	@Override
 	public List<FXTradingEntity> getTradeList()
