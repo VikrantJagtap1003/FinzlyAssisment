@@ -14,7 +14,7 @@ import com.FXTrading.utility.AmountFormater;
 public class FXTradingFormatImpl  implements FXTradingFormat{
 	@Autowired
 	AmountFormater amountFormater;
-	
+	private static int tradeNo=0;
 	private List<FXTradingEntity> bookedTrades=new LinkedList<>();
 	
 
@@ -55,6 +55,9 @@ public class FXTradingFormatImpl  implements FXTradingFormat{
 			fxTradingEntity.setIndianAmount(indianAmount);
 			String formatedUsdAmount=amountFormater.formatingUSDAmount(validAmount);
 			fxTradingEntity.setUsd_Amount(formatedUsdAmount);
+
+			FXTradingFormatImpl.tradeNo=FXTradingFormatImpl.tradeNo+1;
+			fxTradingEntity.setTradeId(tradeNo);
 			
 			this.bookedTrades.add(fxTradingEntity);
 			return fxTradingEntity;
