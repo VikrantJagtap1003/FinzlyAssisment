@@ -40,7 +40,7 @@ public class FXTradingRequests {
 	public ResponseEntity<?> getAllTrades() {
 		List<FXTradingEntity> tradeList = this.fxTradingFormatImpl.getTradeList();
 		if (tradeList.isEmpty()) {
-			 return new ResponseEntity<>("Trade list is empty", HttpStatus.NOT_FOUND);
+			 return new ResponseEntity<>("Trade list is empty", HttpStatus.BAD_REQUESTD);
 		} else {
 			return new ResponseEntity<>(tradeList, HttpStatus.OK);
 		}
