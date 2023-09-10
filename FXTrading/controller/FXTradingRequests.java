@@ -19,34 +19,30 @@ public class FXTradingRequests {
 	private FXTradingFormatImpl fxTradingFormatImpl;
 
 	@PostMapping(value = "/do-trade")
-	public Object doTrading(@RequestBody FXTradingEntity fxTradingEntity) {
-
-		System.out.println("in do trade");
+	public ResponseEntity<?> doTrading(@RequestBody FXTradingEntity fxTradingEntity) {
+		
 		if (fxTradingEntity == null) {
-			return "Not Booked";
+			return new ResponseEntity<>("Trade not Booked", HttpStatus.NOT_ACCEPTABLE);
 		}
-		try {
-			Object object = fxTradingFormatImpl.doTrade(fxTradingEntity);
-			if (object instanceof Map) {
-				((Map) object).put("Status", "Not Booked");
-				return object;
-			} else {
-				return "Trade Booked";
+		
+			Object doTradeReturnedObject = fxTradingFormatImpl.doTrade(fxTradingEntity);
+			if (doTradeReturnedObject instanceof Map) {
+				return new ResponseEntity<>(doTradeReturnedObject, HttpStatus.NOT_ACCEPTABLE);
+			} 
+			else {
+			   return new ResponseEntity<>("Trade  Booked", HttpStatus.OK);
 			}
 
-		} catch (Exception e) {
-			return e.getMessage();
-		}
-
+		
 	}
 
 	@GetMapping("/get-all-trades")
-	public Object getAllTrades() {
+	public ResponseEntity<?> getAllTrades() {
 		List<FXTradingEntity> tradeList = this.fxTradingFormatImpl.getTradeList();
 		if (tradeList.isEmpty()) {
-			return "Your trade List is Empty";
+			 return new ResponseEntity<>("Trade list is empty", HttpStatus.NOT_FOUND);
 		} else {
-			return tradeList;
+			return new ResponseEntity<>(tradeList, HttpStatus.OK);
 		}
 	}
 
