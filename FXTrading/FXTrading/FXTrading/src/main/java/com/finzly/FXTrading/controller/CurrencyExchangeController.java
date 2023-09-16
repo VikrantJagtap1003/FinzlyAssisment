@@ -16,7 +16,7 @@ public class CurrencyExchangeController {
 	Logger logger = LoggerFactory.getLogger(CurrencyExchangeController.class);
 	@Autowired
 	CurrencyExchangeService ccyService;
-
+	
 	@PostMapping("currency-exchange/{currencyrate}")
 	public String addCurrencyExchange(@PathVariable String currencyrate) {
 		try {
